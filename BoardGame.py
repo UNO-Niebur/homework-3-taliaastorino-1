@@ -22,12 +22,19 @@ def displayGame(data):
 
 def movePlayer(data):
     """Moves Player1 forward by a chosen amount."""
-    move = int(input("\nHow many spaces should Player1 move? "))
+
+    currentPlayer = ""
+
+    for item in data:
+        if "Turn:" in item:
+            currentPlayer = item.split(":")[1].strip()
+            
+    move = int(input("\nHow many spaces should " + currentPlayer + " move? "))
 
     newData = []
 
     for item in data:
-        if "Player1" in item:
+        if currentPlayer in item and "Turn" not in item:
             parts = item.split(":")
             position = int(parts[0].strip())
             player = parts[1].strip()
@@ -48,7 +55,6 @@ def movePlayer(data):
                     eventName = eventParts[1].strip()
 
                     if newPosition == eventPosition:
-                        eventFound = True
                         print(player, "landed on", eventName)
 
                         if eventName == "Candy":
@@ -70,6 +76,12 @@ def movePlayer(data):
 
             newItem = str(newPosition) + ": " + player
             newData.append(newItem)
+
+        elif "Turn:" in item:
+            if currentPlayer == "Player1":
+                newData.append("Turn: Player2")
+            else:
+                newData.append("Turn: Player1")
 
         else:
             newData.append(item)
