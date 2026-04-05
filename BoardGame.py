@@ -1,6 +1,8 @@
 # Homework 3 - Board Game System
 # Name: Talia Astorino
 # Date: 04/05/2026
+import random
+
 
 def loadGameData(filename):
     """Reads game data from a file and returns it as a list."""
@@ -21,7 +23,6 @@ def displayGame(data):
 
 
 def movePlayer(data):
-    """Moves Player1 forward by a chosen amount."""
 
     currentPlayer = ""
 
@@ -29,8 +30,9 @@ def movePlayer(data):
         if "Turn:" in item:
             currentPlayer = item.split(":")[1].strip()
             
-    move = int(input("\nHow many spaces should " + currentPlayer + " move? "))
-
+    move = random.randint(1, 6)
+    print("\n" + currentPlayer + " rolled a", move)
+    
     newData = []
 
     for item in data:
@@ -45,8 +47,6 @@ def movePlayer(data):
                 newPosition = 25
 
             print(player, "moved to space", newPosition)
-
-            eventFound = False
 
             for eventItem in data:
                 if "Candy" in eventItem or "Mud" in eventItem or "Rainbow" in eventItem or "Swamp" in eventItem:
@@ -68,6 +68,7 @@ def movePlayer(data):
                             print(player, "moves forward 3 spaces!")
                         elif eventName == "Swamp":
                             print(player, "loses next turn!")
+                            
             if newPosition < 1:
                 newPosition = 1
 
@@ -91,15 +92,39 @@ def main():
     filename = "events.txt"   # Students can rename if needed
 
     gameData = loadGameData(filename)
-    displayGame(gameData)
 
-    # Example interaction
-    choice = input("\nMove player? (y/n): ")
-    if choice.lower() == "y":
-        gameData = movePlayer(gameData)
+    playing = True
 
-        print("\nUpdated Game State:")
+    while playing:
         displayGame(gameData)
+
+        choice = input("\nMove player? (y/n): ")
+        
+        if choice.lower() == "y":
+            gameData = movePlayer(gameData)
+
+            winner = ""
+
+            for item in gameData:
+                if "Player1" in item and "Turn" not in item:
+                    position = int(item.split(":")[0].strip())
+                    if position >= 25:
+                        winner = "Player1"
+
+                elif "Player2" in item and "Turn" not in item:
+                    position = int(item.split(":")[0].strip())
+                    if position >= 25:
+                        winner = "Player2"
+
+            print("\nUpdated Game State:")
+            displayGame(gameData)
+
+            if winner != "":
+                print("\n" + winner + " wins the game!")
+                playing = False
+
+        else:
+            playing = False
 
 
 if __name__ == "__main__":
