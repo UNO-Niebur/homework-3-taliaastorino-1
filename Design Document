@@ -1,0 +1,65 @@
+Assignment: Design Document
+Name: Talia Astorino
+Date: 04/05/2026
+
+What the Game Looks Like:
+
+This is a 2 player game similar to Candy Land.
+There are 25 spaces on the board, with 4 special spaces.
+Both players start on space 1.
+The goal is to reach space 25.
+Players take turns rolling a dice.
+
+Board layout:
+
+1 Start
+10 Candy
+15 Mud
+20 Rainbow
+22 Swamp
+25 Finish
+
+Rules:
+
+Player1 goes first.
+Each turn, the player rolls a 6 sided dice.
+The player moves forward the number of spaces rolled.
+If the player lands on a special space, an event happens-
+Candy: move forward 2 spaces.
+Mud: move backward 2 spaces.
+Rainbow: move forward 3 spaces.
+Swamp: move backward 4 spaces.
+A player cannot go lower than space 1.
+A player does not have to roll the exact number of spaces to land on space 25.
+The first player to reach space 25 wins the game.
+
+Functions Used:
+
+loadGameData(filename)
+Reads the game information from the text file
+Stores each line into a list
+
+displayGame(data)
+Displays the current game state
+Shows player positions and event spaces
+
+movePlayer(data)
+Finds whose turn it is
+Rolls the dice
+Moves the player
+Checks for special event spaces
+Updates player positions
+Changes the turn to the next player
+
+How Data Is Stored:
+
+The game data is stored in a text file called events.txt.
+This is the text it includes at the beginning of each game-
+Turn: Player1
+1: Player1
+1: Player2
+10: Candy
+15: Mud
+20: Rainbow
+23: Swamp
+Each line is stored in a list. The program reads the list and updates player positions during the game.
