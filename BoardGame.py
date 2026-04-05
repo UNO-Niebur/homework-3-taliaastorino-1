@@ -67,7 +67,8 @@ def movePlayer(data):
                             newPosition += 3
                             print(player, "moves forward 3 spaces!")
                         elif eventName == "Swamp":
-                            print(player, "loses next turn!")
+                            newPosition -= 4
+                            print(player, "moves backward 4 spaces!")
                             
             if newPosition < 1:
                 newPosition = 1
