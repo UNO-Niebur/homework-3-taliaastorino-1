@@ -1,6 +1,6 @@
 Turn: Player1
-3: Player1
-7: Player2
+1: Player1
+1: Player2
 10: Candy
 15: Mud
 20: Rainbow
