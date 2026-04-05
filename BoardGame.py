@@ -1,6 +1,6 @@
 # Homework 3 - Board Game System
-# Name:
-# Date:
+# Name: Talia Astorino
+# Date: 04/05/2026
 
 def loadGameData(filename):
     """Reads game data from a file and returns it as a list."""
